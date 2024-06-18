@@ -66,6 +66,9 @@ dependencies {
     implementation("io.ktor:ktor-client-android:2.3.11")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.11")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.11")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.2")
 
 
     testImplementation(libs.junit)

@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.appdelclima.ui.theme.AppDelClimaTheme
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 
 @Composable
 fun ClimaView(
@@ -21,6 +23,9 @@ fun ClimaView(
     state: ClimaEstado,
     onAction:(ClimaIntencion)->Unit
 ) {
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        onAction(ClimaIntencion.actualizarClima)
+    }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -34,7 +39,7 @@ fun ClimaView(
                 temperatura = state.temperatura,
                 descripcion =state.descripcion,
                 st = state.st)
-            is ClimaEstado.Vacio-> EmptyView()
+            is ClimaEstado.Vacio-> LoadingView()
             is ClimaEstado.Cargando-> EmptyView()
         }
 
@@ -53,6 +58,10 @@ fun ClimaView(
         }
     }
 
+}
+@Composable
+fun LoadingView(){
+    Text(text = "Cargando")
 }
 @Composable
 fun ErrorView(mensaje:String){

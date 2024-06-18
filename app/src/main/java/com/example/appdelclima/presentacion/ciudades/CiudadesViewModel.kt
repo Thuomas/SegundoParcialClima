@@ -11,10 +11,13 @@ import com.example.appdelclima.presentacion.clima.ClimaEstado
 import com.example.appdelclima.presentacion.clima.ClimaIntencion
 import com.example.appdelclima.repository.Repositorio
 import com.example.appdelclima.repository.modelos.Ciudad
+import com.example.appdelclima.router.Router
+import com.example.appdelclima.router.Ruta
 import kotlinx.coroutines.launch
 
 class CiudadesViewModel(
-    val repositorio: Repositorio
+    val repositorio: Repositorio,
+    val router: Router
 ) : ViewModel() {
     var uiState by mutableStateOf<CiudadesEstado>(CiudadesEstado.Vacio)
     fun ejecutar(intencion: CiudadesIntencion) {
@@ -31,7 +34,7 @@ class CiudadesViewModel(
                 val listaDeCiudades = repositorio.buscarCiudad(nombre)
                 uiState = CiudadesEstado.Resultado(listaDeCiudades)
             } catch (exception: Exception) {
-                uiState = CiudadesEstado.Error("Error al buscar la ciudad")
+                uiState = CiudadesEstado.Error(exception.message?:"error desconocido")
             }
         }
     }
@@ -39,16 +42,22 @@ class CiudadesViewModel(
 
     private fun seleccionar(indice: Int) {
         uiState = CiudadesEstado.Vacio
+        router.navegar(Ruta.Clima())
+    }
+
+    private fun geo(){
+
     }
 }
 
 class CiudadesViewModelFactory(
-    private val repositorio: Repositorio
+    private val repositorio: Repositorio,
+    private val router: Router
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CiudadesViewModel::class.java)) {
-            return CiudadesViewModel(repositorio) as T
+            return CiudadesViewModel(repositorio,router) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 
