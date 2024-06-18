@@ -2,8 +2,6 @@ package com.example.appdelclima.presentacion.ciudades
 
 
 sealed class CiudadesIntencion {
-    object Buscar(val: String)  : CiudadesIntencion()
-    object MostrarCaba : ClimaIntencion()
-    object BorrarTodo : ClimaIntencion()
-    object MostarError : ClimaIntencion()
+    data class Buscar(val nombre: String) : CiudadesIntencion()
+    data class Seleccionar(val indice:Int): CiudadesIntencion()
 }
