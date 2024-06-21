@@ -15,13 +15,19 @@ import com.example.appdelclima.router.Enrutador
 
 @Composable
 fun ClimaPage(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    lat : Float,
+    lon : Float,
+    nombre: String
 ) {
 
     val viewModel: ClimaViewModel = viewModel(
         factory = ClimaViewModelFactory(
             repositorio = RepositorioApi(),
-            router= Enrutador(navHostController)
+            router= Enrutador(navHostController),
+            lat = lat,
+            lon = lon,
+           nombre = nombre
         )
     )
 

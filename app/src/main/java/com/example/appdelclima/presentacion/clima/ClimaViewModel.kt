@@ -18,13 +18,16 @@ import com.example.appdelclima.router.Router
 import kotlinx.coroutines.launch
 
 class ClimaViewModel(
-    val repositorio : Repositorio,
-   val router: Router
+    val repositorio: Repositorio,
+    val router: Router,
+    val lat: Float,
+    val lon: Float,
+    val nombre: String
 ) : ViewModel() {
     var uiState by mutableStateOf<ClimaEstado>(ClimaEstado.Vacio)
 
-    fun ejecutar(intencion: ClimaIntencion){
-        when(intencion){
+    fun ejecutar(intencion: ClimaIntencion) {
+        when (intencion) {
             ClimaIntencion.actualizarClima -> traerClima()
         }
     }
@@ -32,15 +35,15 @@ class ClimaViewModel(
     fun traerClima() {
         uiState = ClimaEstado.Cargando
         viewModelScope.launch {
-            try{
+            try {
                 val clima = repositorio.traerClima(lat = lat, lon = lon)
                 uiState = ClimaEstado.Exitoso(
-                    ciudad = clima.name ,
+                    ciudad = clima.name,
                     temperatura = clima.main.temp,
                     descripcion = clima.weather.first().description,
                     st = clima.main.feels_like,
                 )
-            } catch (exception: Exception){
+            } catch (exception: Exception) {
                 uiState = ClimaEstado.Error(exception.localizedMessage ?: "error desconocido")
             }
         }
@@ -53,11 +56,12 @@ class ClimaViewModelFactory(
     private val router: Router,
     private val lat: Float,
     private val lon: Float,
+    private val nombre: String,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ClimaViewModel::class.java)) {
-            return ClimaViewModel(repositorio,router,lat,lon) as T
+            return ClimaViewModel(repositorio, router, lat, lon, nombre) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

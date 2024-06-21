@@ -44,18 +44,7 @@ fun ClimaView(
         }
 
         Spacer(modifier = Modifier.height(100.dp))
-        Button(onClick = { onAction(ClimaIntencion.BorrarTodo) }) {
-            Text(text = "Borrar todo")
-        }
-        Button(onClick = { onAction(ClimaIntencion.MostrarCaba) }) {
-            Text(text = "Mostrar Caba")
-        }
-        Button(onClick = { onAction(ClimaIntencion.MostrarCordoba) }) {
-            Text(text = "Mostrar Cordoba")
-        }
-        Button(onClick = { onAction(ClimaIntencion.MostarError) }) {
-            Text(text = "Mostrar Error")
-        }
+
     }
 
 }

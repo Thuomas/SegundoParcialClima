@@ -20,10 +20,11 @@ class CiudadesViewModel(
     val router: Router
 ) : ViewModel() {
     var uiState by mutableStateOf<CiudadesEstado>(CiudadesEstado.Vacio)
+    var ciudades : List<Ciudad> = emptyList()
     fun ejecutar(intencion: CiudadesIntencion) {
         when (intencion) {
             is CiudadesIntencion.Buscar -> buscar(nombre = intencion.nombre)
-            is CiudadesIntencion.Seleccionar -> seleccionar(indice = intencion.indice)
+            is CiudadesIntencion.Seleccionar -> seleccionar(ciudad = intencion.ciudad)
         }
     }
 
@@ -31,8 +32,12 @@ class CiudadesViewModel(
         uiState = CiudadesEstado.Cargando
         viewModelScope.launch {
             try {
-                val listaDeCiudades = repositorio.buscarCiudad(nombre)
-                uiState = CiudadesEstado.Resultado(listaDeCiudades)
+                ciudades = repositorio.buscarCiudad(nombre)
+                if (ciudades.isEmpty()) {
+                    uiState = CiudadesEstado.Vacio
+                } else {
+                    uiState = CiudadesEstado.Resultado(ciudades)
+                }
             } catch (exception: Exception) {
                 uiState = CiudadesEstado.Error(exception.message?:"error desconocido")
             }
@@ -40,9 +45,13 @@ class CiudadesViewModel(
     }
 
 
-    private fun seleccionar(indice: Int) {
-        uiState = CiudadesEstado.Vacio
-        router.navegar(Ruta.Clima())
+    private fun seleccionar(ciudad: Ciudad) {
+        val ruta = Ruta.Clima(
+            lat = ciudad.lat,
+            lon = ciudad.lon,
+            nombre = ciudad.name
+        )
+        router.navegar(ruta)
     }
 
     private fun geo(){
