@@ -25,33 +25,41 @@ fun CiudadesView(
     state: CiudadesEstado,
     onAction: (CiudadesIntencion) -> Unit
 ) {
-    var value by remember { mutableStateOf("") }
+    var value by remember {
+        mutableStateOf("")
+    }
     Column(modifier = modifier) {
-        TextField(value = value, onValueChange = {
+        TextField(
+            value = value,
+            label = {
+                Text(text = "Buscar por nombre")
+            },
+            onValueChange = {
             value = it
             onAction(CiudadesIntencion.Buscar(value))
         },
-            label = {
-                Text(text = "Buscar por nombre")
-            })
+            )
         when (state) {
-            is CiudadesEstado.Cargando -> TODO()
+            is CiudadesEstado.Cargando -> Text(text = "Cargando")
             is CiudadesEstado.Error -> Text(text = state.mensaje)
-            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades,{onAction(CiudadesIntencion.Seleccionar(it))})
+            is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades)
+                { onAction(
+                    CiudadesIntencion.Seleccionar(it)
+                )
+            }
+
             CiudadesEstado.Vacio -> Text(text = "No hay resultados")
         }
-        Button(onClick = { onAction(CiudadesIntencion.Seleccionar(0) )}) {
-            Text(text = "Usar Geo")
-        }
+
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Int) -> Unit) {
+fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad) -> Unit) {
     LazyColumn {
         items(items = ciudades) {
-            Card(onClick = {onSelect(0)} ) {//TODO indice no debe ser cero
+            Card(onClick = { onSelect(it) }) {
                 Text(text = it.name)
             }
         }

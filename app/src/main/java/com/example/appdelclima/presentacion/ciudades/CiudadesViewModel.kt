@@ -20,7 +20,7 @@ class CiudadesViewModel(
     val router: Router
 ) : ViewModel() {
     var uiState by mutableStateOf<CiudadesEstado>(CiudadesEstado.Vacio)
-    var ciudades : List<Ciudad> = emptyList()
+    var ciudades: List<Ciudad> = emptyList()
     fun ejecutar(intencion: CiudadesIntencion) {
         when (intencion) {
             is CiudadesIntencion.Buscar -> buscar(nombre = intencion.nombre)
@@ -39,7 +39,7 @@ class CiudadesViewModel(
                     uiState = CiudadesEstado.Resultado(ciudades)
                 }
             } catch (exception: Exception) {
-                uiState = CiudadesEstado.Error(exception.message?:"error desconocido")
+                uiState = CiudadesEstado.Error(exception.message ?: "error desconocido")
             }
         }
     }
@@ -54,8 +54,8 @@ class CiudadesViewModel(
         router.navegar(ruta)
     }
 
-    private fun geo(){
-
+    private fun geo() {
+        //TODO ver como ubtener y usar la geo
     }
 }
 
@@ -66,7 +66,7 @@ class CiudadesViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CiudadesViewModel::class.java)) {
-            return CiudadesViewModel(repositorio,router) as T
+            return CiudadesViewModel(repositorio, router) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 
