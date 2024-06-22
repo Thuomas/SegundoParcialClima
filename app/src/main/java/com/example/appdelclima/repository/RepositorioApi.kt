@@ -23,24 +23,24 @@ class RepositorioApi : Repositorio {
         }
 
     }
-    override suspend fun buscarCiudad(ciudad: String): Array<Ciudad> {
+    override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
         val respuesta = cliente.get("http://api.openweathermap.org/geo/1.0/direct"){
             parameter("q",ciudad)
-            parameter("limit",5)
+            parameter("limit",100)
             parameter("appid",apiKey)
         }
         if (respuesta.status == HttpStatusCode.OK){
-            val ciudades = respuesta.body<Array<Ciudad>>()
+            val ciudades = respuesta.body<List<Ciudad>>()
             return ciudades
         }else{
             throw Exception()
         }
     }
 
-    override suspend fun traerClima(ciudad: Ciudad): Clima {
+    override suspend fun traerClima(lat: Float, lon: Float): Clima {
         val respuesta = cliente.get("http://api.openweathermap.org/data/2.5/weather"){
-            parameter("lat", ciudad.lat)
-            parameter("lon",ciudad.lon)
+            parameter("lat", lat)
+            parameter("lon",lon)
             parameter("units","metrics")
             parameter("appid",apiKey)
         }
