@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.2")
+    //implementation(libs.androidx.material3.android)
 
 
     testImplementation(libs.junit)

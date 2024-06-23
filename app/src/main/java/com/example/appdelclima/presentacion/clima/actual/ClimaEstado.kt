@@ -1,6 +1,4 @@
-package com.example.appdelclima.presentacion.clima
-
-import com.example.appdelclima.repository.modelos.Clima
+package com.example.appdelclima.presentacion.clima.actual
 
 sealed class ClimaEstado{
     data class Exitoso(

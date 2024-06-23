@@ -1,4 +1,4 @@
-package com.example.appdelclima.presentacion.clima
+package com.example.appdelclima.presentacion.clima.actual
 
 sealed class ClimaIntencion {
 

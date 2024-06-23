@@ -1,4 +1,4 @@
-package com.example.appdelclima.presentacion.clima
+package com.example.appdelclima.presentacion.clima.actual
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,14 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.appdelclima.presentacion.ciudades.CiudadesViewModel
 import com.example.appdelclima.repository.Repositorio
-import com.example.appdelclima.repository.RepositorioApi
-import com.example.appdelclima.repository.RepositorioMock
-import com.example.appdelclima.repository.modelos.Ciudad
-import com.example.appdelclima.repository.modelos.Clima
 import com.example.appdelclima.router.Router
 import kotlinx.coroutines.launch
 

@@ -6,9 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.appdelclima.presentacion.clima.ClimaEstado
-import com.example.appdelclima.presentacion.clima.ClimaIntencion
 import com.example.appdelclima.repository.Repositorio
 import com.example.appdelclima.repository.modelos.Ciudad
 import com.example.appdelclima.router.Router
