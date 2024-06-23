@@ -2,6 +2,7 @@ package com.example.appdelclima.repository
 
 import com.example.appdelclima.repository.modelos.Ciudad
 import com.example.appdelclima.repository.modelos.Clima
+import com.example.appdelclima.repository.modelos.ListForecast
 
 class RepositorioMock : Repositorio {
 
@@ -40,7 +41,7 @@ class RepositorioMock : Repositorio {
 
     }
 
-    override suspend fun traerPronostico(ciudad: Ciudad): List<Clima> {
+    override suspend fun traerPronostico(nombre: String): List<ListForecast> {
         TODO("Not yet implemented")
     }
 }

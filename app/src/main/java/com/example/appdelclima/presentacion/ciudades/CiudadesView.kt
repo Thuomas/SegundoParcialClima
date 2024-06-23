@@ -1,6 +1,8 @@
 package com.example.appdelclima.presentacion.ciudades
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -13,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.appdelclima.repository.modelos.Ciudad
 
 
@@ -25,7 +28,8 @@ fun CiudadesView(
     var value by remember {
         mutableStateOf("")
     }
-    Column(modifier = modifier) {
+    Column(modifier = modifier.fillMaxWidth()
+        .padding(top = 40.dp)) {
         TextField(
             value = value,
             label = {
