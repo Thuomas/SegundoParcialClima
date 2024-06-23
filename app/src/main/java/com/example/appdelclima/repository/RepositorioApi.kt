@@ -23,8 +23,9 @@ class RepositorioApi : Repositorio {
         }
 
     }
+
     override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
-        val respuesta = cliente.get("http://api.openweathermap.org/geo/1.0/direct"){
+        val respuesta = cliente.get("https://api.openweathermap.org/geo/1.0/direct"){
             parameter("q",ciudad)
             parameter("limit",100)
             parameter("appid",apiKey)
@@ -38,7 +39,7 @@ class RepositorioApi : Repositorio {
     }
 
     override suspend fun traerClima(lat: Float, lon: Float): Clima {
-        val respuesta = cliente.get("http://api.openweathermap.org/data/2.5/weather"){
+        val respuesta = cliente.get("https://api.openweathermap.org/data/2.5/weather"){
             parameter("lat", lat)
             parameter("lon",lon)
             parameter("units","metrics")
