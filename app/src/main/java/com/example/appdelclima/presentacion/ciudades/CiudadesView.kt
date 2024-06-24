@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.appdelclima.repository.modelos.Ciudad
@@ -25,26 +26,28 @@ fun CiudadesView(
     state: CiudadesEstado,
     onAction: (CiudadesIntencion) -> Unit
 ) {
-    var value by remember {
-        mutableStateOf("")
-    }
-    Column(modifier = modifier.fillMaxWidth()
-        .padding(top = 40.dp)) {
+    var value by remember {mutableStateOf("") }
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
         TextField(
             value = value,
-            label = {
-                Text(text = "Buscar por nombre")
-            },
+            label = { Text(text = "Buscar por nombre") },
             onValueChange = {
-            value = it
-            onAction(CiudadesIntencion.Buscar(value))
-        },
-            )
+                value = it
+                onAction(CiudadesIntencion.Buscar(value))
+            },
+        )
         when (state) {
             is CiudadesEstado.Cargando -> Text(text = "Cargando")
             is CiudadesEstado.Error -> Text(text = state.mensaje)
             is CiudadesEstado.Resultado -> ListaDeCiudades(state.ciudades)
-                { onAction(
+            {
+                onAction(
                     CiudadesIntencion.Seleccionar(it)
                 )
             }
@@ -57,7 +60,7 @@ fun CiudadesView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad) -> Unit) {
+fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad)->Unit) {
     LazyColumn {
         items(items = ciudades) {
             Card(onClick = { onSelect(it) }) {

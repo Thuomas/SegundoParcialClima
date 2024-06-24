@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainPage(modifier = Modifier.padding(16.dp))
+                    MainPage()
                 }
             }
         }

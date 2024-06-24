@@ -14,7 +14,7 @@ import com.example.appdelclima.router.Enrutador
 import com.example.appdelclima.router.Ruta
 
 @Composable
-fun MainPage(modifier: Modifier){
+fun MainPage(){
     val navHostController = rememberNavController()
     NavHost(
         navController = navHostController,
