@@ -6,28 +6,28 @@ import com.example.appdelclima.repository.modelos.ListForecast
 
 class RepositorioMock : Repositorio {
 
-        val ciudad1 = Ciudad(
-            "Buenos Aires",
+        val cordoba = Ciudad(
+            "Cordoba",
             lat = -23.0f,
             lon = -24.3f,
             //country = "Arg",
             country = "Argentina",
         )
-        val ciudad2 = Ciudad(
-            "Mar del Plata",
+        val bsAs = Ciudad(
+            "Buenos Aires",
             lat = -22.0f,
             lon = -25.3f,
             //country = "Arg",
             country = "Argentina",
         )
-        val ciudad3 = Ciudad(
-            "Campana",
+        val laPlata = Ciudad(
+            "La Plata",
             lat = -33.0f,
             lon = -44.3f,
             //country = "Arg",
             country = "Argentina",
         )
-        val ciudades = listOf(ciudad1,ciudad2,ciudad3)
+        val ciudades = listOf(cordoba,bsAs,laPlata)
     override suspend fun buscarCiudad(ciudad:String): List<Ciudad> {
         if (ciudad == "error") {
             throw Exception("Error")
@@ -43,5 +43,20 @@ class RepositorioMock : Repositorio {
 
     override suspend fun traerPronostico(nombre: String): List<ListForecast> {
         TODO("Not yet implemented")
+    }
+}
+
+class RepositorioMockError  : Repositorio {
+
+    override suspend fun buscarCiudad(ciudad: String): List<Ciudad> {
+        throw Exception()
+    }
+
+    override suspend fun traerClima(lat: Float, lon: Float): Clima {
+        throw Exception()
+    }
+
+    override suspend fun traerPronostico(nombre: String): List<ListForecast> {
+        throw Exception()
     }
 }
