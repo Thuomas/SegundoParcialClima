@@ -61,11 +61,16 @@ fun ErrorView(mensaje: String){
 
 @Composable
 fun PronosticoView(climas: List<ListForecast>){
+    Text(text = "Pronostico para los siguientes dias")
     LazyColumn {
         items(items = climas) {
             Card() {
-                Text(text = "${it.main.temp}")
+                Text(text = "Temperatura: ${it.main.temp}")
+                Text(text = "Temperatura minima: ${it.main.temp_min}")
+                Text(text = "Temperatura maxima: ${it.main.temp_max}")
+                Text(text = "Humedad: ${it.main.humidity}%")
             }
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
