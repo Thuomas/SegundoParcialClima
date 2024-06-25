@@ -63,7 +63,7 @@ fun ErrorView(mensaje: String){
 
 @Composable
 fun ClimaView(ciudad: String, temperatura: Double, descripcion: String, st:Double){
-    Column {
+    Column (){
         Text(text = ciudad, style = MaterialTheme.typography.titleMedium)
         Text(text = "${temperatura}°", style = MaterialTheme.typography.titleLarge)
         Text(text = descripcion, style = MaterialTheme.typography.bodyMedium)

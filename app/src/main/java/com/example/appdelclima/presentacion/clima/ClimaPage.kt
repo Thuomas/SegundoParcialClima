@@ -1,5 +1,8 @@
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.appdelclima.presentacion.clima.actual.ClimaView
 //MainPageUIState
@@ -37,7 +40,7 @@ fun ClimaPage(
             nombre = nombre
         )
     )
-    Column{
+    Column(modifier = Modifier.padding(16.dp)){
         ClimaView(
             state = viewModel.uiState,
             onAction = { intencion ->
