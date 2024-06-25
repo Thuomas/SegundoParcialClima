@@ -63,7 +63,8 @@ fun CiudadesView(
 fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad)->Unit) {
     LazyColumn {
         items(items = ciudades) {
-            Card(onClick = { onSelect(it) }) {
+            Card(modifier = Modifier.fillMaxWidth(),
+                onClick = { onSelect(it) }) {
                 Text(text = it.name)
             }
         }

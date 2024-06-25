@@ -51,18 +51,19 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun ciudadesViewModel_buscar_cor() = runTest(timeout = 3.seconds){
+    fun ciudadesViewModel_buscar_cor() = runTest(timeout = 3.seconds) {
         val estadoEsperado = CiudadesEstado.Resultado(listOf(repositorio.cordoba))
 
         launch(Dispatchers.Main) {
-            viewModel.ejecutar(intencion= CiudadesIntencion.Buscar("cor"))
+            viewModel.ejecutar(intencion = CiudadesIntencion.Buscar("cor"))
             delay(1.seconds)
             assertEquals(estadoEsperado, viewModel.uiState)
 
         }
     }
+
     @Test
-    fun ciudadesViewModel_buscar_plata()  = runTest(timeout = 3.seconds) {
+    fun ciudadesViewModel_buscar_plata() = runTest(timeout = 3.seconds) {
         //Creo Valor esperado
         val estadoEsperado = CiudadesEstado.Resultado(listOf(repositorio.laPlata))
 
@@ -74,7 +75,7 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun ciudadesViewModel_buscar_vacio()  = runTest(timeout = 3.seconds) {
+    fun ciudadesViewModel_buscar_vacio() = runTest(timeout = 3.seconds) {
         //Creo Valor esperado
         val estadoEsperado = CiudadesEstado.Vacio
 
@@ -84,8 +85,33 @@ class ExampleUnitTest {
             assertEquals(estadoEsperado, viewModel.uiState)
         }
     }
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun ciudadesViewModel_buscar_error() = runTest(timeout = 3.seconds) {
+
+        val factory = CiudadesViewModelFactory(repositorioError, router)
+        val viewModel = factory.create(CiudadesViewModel::class.java)
+
+        val estadoEsperado = CiudadesEstado.Error("error")
+
+        launch(Dispatchers.Main) {
+            viewModel.ejecutar(intencion = CiudadesIntencion.Buscar(""))
+            delay(1.milliseconds)
+            assertEquals(estadoEsperado, viewModel.uiState)
+        }
     }
+
+    @Test
+    fun ciudadesViewModel_buscar_case_insensitive() = runTest(timeout = 3.seconds) {
+
+        val estadoEsperado = CiudadesEstado.Resultado(listOf(repositorio.cordoba))
+           launch(Dispatchers.Main) {
+               viewModel.ejecutar(intencion = CiudadesIntencion.Buscar("COrDObA"))
+               delay(1.milliseconds)
+               assertEquals(estadoEsperado, viewModel.uiState)
+           }
+
+    }
+
+    
 }

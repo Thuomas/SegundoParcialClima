@@ -51,9 +51,7 @@ class CiudadesViewModel(
         router.navegar(ruta)
     }
 
-    private fun geo() {
-        //TODO ver como ubtener y usar la geo
-    }
+
 }
 
 class CiudadesViewModelFactory(
