@@ -1,12 +1,16 @@
 package com.example.appdelclima.presentacion.ciudades
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,14 +30,20 @@ fun CiudadesView(
     state: CiudadesEstado,
     onAction: (CiudadesIntencion) -> Unit
 ) {
-    var value by remember {mutableStateOf("") }
+    var value by remember { mutableStateOf("") }
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = "Bienvenido a su aplicacion del clima",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary,
 
+        )
+        Spacer(modifier = Modifier.height(20.dp))
         TextField(
             value = value,
             label = { Text(text = "Buscar por nombre") },
@@ -60,7 +70,7 @@ fun CiudadesView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad)->Unit) {
+fun ListaDeCiudades(ciudades: List<Ciudad>, onSelect: (Ciudad) -> Unit) {
     LazyColumn {
         items(items = ciudades) {
             Card(modifier = Modifier.fillMaxWidth(),
