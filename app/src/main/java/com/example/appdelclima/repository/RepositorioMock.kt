@@ -10,21 +10,18 @@ class RepositorioMock : Repositorio {
             "Cordoba",
             lat = -23.0f,
             lon = -24.3f,
-            //country = "Arg",
             country = "Argentina",
         )
         val bsAs = Ciudad(
             "Buenos Aires",
             lat = -22.0f,
             lon = -25.3f,
-            //country = "Arg",
             country = "Argentina",
         )
         val laPlata = Ciudad(
             "La Plata",
             lat = -33.0f,
             lon = -44.3f,
-            //country = "Arg",
             country = "Argentina",
         )
         val ciudades = listOf(cordoba,bsAs,laPlata)

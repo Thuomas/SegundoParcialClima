@@ -19,6 +19,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 /**
@@ -60,7 +61,29 @@ class ExampleUnitTest {
 
         }
     }
+    @Test
+    fun ciudadesViewModel_buscar_plata()  = runTest(timeout = 3.seconds) {
+        //Creo Valor esperado
+        val estadoEsperado = CiudadesEstado.Resultado(listOf(repositorio.laPlata))
 
+        launch(Dispatchers.Main) {
+            viewModel.ejecutar(intencion = CiudadesIntencion.Buscar("plata"))
+            delay(1.milliseconds)
+            assertEquals(estadoEsperado, viewModel.uiState)
+        }
+    }
+
+    @Test
+    fun ciudadesViewModel_buscar_vacio()  = runTest(timeout = 3.seconds) {
+        //Creo Valor esperado
+        val estadoEsperado = CiudadesEstado.Vacio
+
+        launch(Dispatchers.Main) {
+            viewModel.ejecutar(intencion = CiudadesIntencion.Buscar("jojo"))
+            delay(1.milliseconds)
+            assertEquals(estadoEsperado, viewModel.uiState)
+        }
+    }
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
